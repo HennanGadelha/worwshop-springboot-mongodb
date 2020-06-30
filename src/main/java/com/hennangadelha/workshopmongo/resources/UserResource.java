@@ -57,7 +57,6 @@ public class UserResource {
 	}
 	
 	
-	
 	@RequestMapping( method=RequestMethod.POST )// request body usado para o endpoint reconhcer  o obj
 	public ResponseEntity <Void> insert(@RequestBody UserDto userDto){
 		
@@ -67,6 +66,22 @@ public class UserResource {
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(user.getId()).toUri();
 		
 		return ResponseEntity.created(uri).build(); 
+		
+	}
+	
+	
+	@RequestMapping( value= "/{id}", method=RequestMethod.PUT )// request body usado para o endpoint reconhcer  o obj
+	public ResponseEntity <Void> update(@RequestBody UserDto userDto, @PathVariable String id ){
+		
+		User user = service.fromDto(userDto);
+		
+		user.setId(id);
+		
+		//user = service.insert(user);
+		
+		user = service.update(user);
+		
+		return ResponseEntity.noContent().build();
 		
 	}
 	
