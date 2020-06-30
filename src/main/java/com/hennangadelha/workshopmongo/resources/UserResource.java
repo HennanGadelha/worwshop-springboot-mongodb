@@ -46,6 +46,18 @@ public class UserResource {
 		
 	}
 	
+	
+	@RequestMapping( value= "/{id}", method=RequestMethod.DELETE )
+	public ResponseEntity <Void> delete(@PathVariable String id){
+		
+		service.delete(id);
+		
+		return ResponseEntity.noContent().build();
+		
+	}
+	
+	
+	
 	@RequestMapping( method=RequestMethod.POST )// request body usado para o endpoint reconhcer  o obj
 	public ResponseEntity <Void> insert(@RequestBody UserDto userDto){
 		
